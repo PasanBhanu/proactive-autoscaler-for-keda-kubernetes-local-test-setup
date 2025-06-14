@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: springboot-test
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: springboot-test
+  name: springbootapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springbootapi
+  template:
+    metadata:
+      labels:
+        app: springbootapi
+    spec:
+      containers:
+        - name: springbootapi
+          image: pasanbhanu/spring-boot-api-with-prometheus:latest
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springbootapi-service
+  namespace: springboot-test
+  labels:
+    monitoring: "true"
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
+    prometheus.io/path: "/actuator/prometheus"
+spec:
+  selector:
+    app: springbootapi
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

@@ -5,3 +5,26 @@ metricServer:
 operator:
   replicaCount: 1
   enabled: true
+
+resources:
+  operator:
+    limits:
+      cpu: 0.1
+      memory: 100Mi
+    requests:
+      cpu: 0.05
+      memory: 100Mi
+  metricServer:
+    limits:
+      cpu: 0.1
+      memory: 100Mi
+    requests:
+      cpu: 0.05
+      memory: 100Mi
+  webhooks:
+    limits:
+      cpu: 0.1
+      memory: 100Mi
+    requests:
+      cpu: 0.05
+      memory: 100Mi
