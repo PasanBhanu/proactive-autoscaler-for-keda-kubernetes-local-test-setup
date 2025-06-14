@@ -47,4 +47,4 @@ Grafana: kubectl port-forward service/grafana 3000:80 -n monitoring
 
 ## Grafana Dashboard IDs
 4701
-22111
+https://github.com/kedacore/keda/blob/main/config/grafana/keda-dashboard.json
