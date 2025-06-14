@@ -36,9 +36,3 @@ prometheus:
       enabled: true
     serviceMonitor:
       enabled: true
-  metricServer:
-    enabled: true
-    podMonitor:
-      enabled: true
-    serviceMonitor:
-      enabled: true
