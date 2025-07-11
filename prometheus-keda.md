@@ -1,17 +1,7 @@
-# KEDA
+# Test App
 
-## Install KEDA
-
-helm repo add kedacore https://kedacore.github.io/charts  
-helm repo update
-
-kubectl create namespace keda
-helm upgrade --install keda kedacore/keda --values keda/values.yaml --namespace keda
-
-## Uninstall KEDA
-
-helm uninstall keda --namespace keda
-kubectl delete namespace keda
+kubectl create namespace springboot-test
+kubectl apply -f test-app/deployment.yaml -n springboot-test
 
 # Prometheus
 
@@ -29,6 +19,9 @@ kubectl apply -f keda/deployment.yaml -n keda
 ## Create Autoscaler Target
 kubectl apply -f keda/keda-lsfb-scaler.yaml
 
+## Uninstall Prometheus
+helm uninstall prometheus --namespace monitoring
+
 # Grafana
 
 ## Install Grafana
@@ -37,6 +30,24 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
 
 helm install grafana grafana/grafana --values grafana/values.yaml --namespace monitoring
+
+## Uninstall Grafana
+helm uninstall grafana --namespace monitoring
+
+# KEDA
+
+## Install KEDA
+
+helm repo add kedacore https://kedacore.github.io/charts  
+helm repo update
+
+kubectl create namespace keda
+helm upgrade --install keda kedacore/keda --values keda/values.yaml --namespace keda
+
+## Uninstall KEDA
+
+helm uninstall keda --namespace keda
+kubectl delete namespace keda
 
 # Testing
 
